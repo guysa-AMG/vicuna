@@ -1,7 +1,11 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:vicuna/screen/home.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+
+  runApp(DevicePreview(builder: (ctx)=>const MyApp()));
+   
 }
 
 class MyApp extends StatelessWidget {
@@ -10,12 +14,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'vicuna',
+      
       theme: ThemeData(
-        
-        colorScheme: .fromSeed(seedColor: const Color.from(alpha: 255, red: 59, green: 130, blue: 246)),
+          
+        colorScheme: .fromSeed(seedColor: const Color(0xFF2563E0)),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home:  Home(),
     );
   }
 }

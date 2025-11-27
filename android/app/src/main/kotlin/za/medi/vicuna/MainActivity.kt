@@ -1,4 +1,4 @@
-package za.medi.epicrisis.epicrisis
+package za.medi.vicuna
 
 import io.flutter.embedding.android.FlutterActivity
 

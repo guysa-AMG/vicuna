@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "za.medi.epicrisis" "\0"
-            VALUE "FileDescription", "epicrisis" "\0"
+            VALUE "CompanyName", "za.medi.vicuna" "\0"
+            VALUE "FileDescription", "vicuna" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "epicrisis" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2025 za.medi.epicrisis. All rights reserved." "\0"
-            VALUE "OriginalFilename", "epicrisis.exe" "\0"
-            VALUE "ProductName", "epicrisis" "\0"
+            VALUE "InternalName", "vicuna" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2025 za.medi.vicuna. All rights reserved." "\0"
+            VALUE "OriginalFilename", "vicuna.exe" "\0"
+            VALUE "ProductName", "vicuna" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

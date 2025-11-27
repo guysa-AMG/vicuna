@@ -5,10 +5,10 @@
 // 'flutter create' template.
 
 // The application's name. By default this is also the title of the Flutter window.
-PRODUCT_NAME = epicrisis
+PRODUCT_NAME = vicuna
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = za.medi.epicrisis.epicrisis
+PRODUCT_BUNDLE_IDENTIFIER = za.medi.vicuna.vicuna
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2025 za.medi.epicrisis. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2025 za.medi.vicuna. All rights reserved.
