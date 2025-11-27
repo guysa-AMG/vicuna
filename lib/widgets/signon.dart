@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 class AuthBtn extends StatefulWidget{
   String label;
   Widget icon;
- AuthBtn({super.key,required this.label,required this.icon});
+  Color background;
+ AuthBtn({super.key,required this.label,required this.icon,this.background=Colors.white});
 @override
 State<AuthBtn> createState()=> AuthBtnState();
 }
@@ -17,10 +18,14 @@ class AuthBtnState extends State<AuthBtn>{
     double width = MediaQuery.of(ctx).size.width*0.85;
     return SizedBox(
       width: width,
-      child:OutlinedButton.icon(onPressed: (){},
-            style: ButtonStyle(),
+      child:ElevatedButton.icon(onPressed: (){},
+            style: ButtonStyle(
+              padding: WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: 10)),
+              backgroundColor: WidgetStatePropertyAll(super.widget.background),
+              shape: WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(7),side: BorderSide(width: 0.6,color: Colors.black45)))
+            ),
             icon: super.widget.icon,
-              label:Text(super.widget.label) )
+              label:Text(super.widget.label ,style: TextStyle(color: super.widget.background!=Colors.white?Colors.white:Colors.black),) )
             );
   }
 }

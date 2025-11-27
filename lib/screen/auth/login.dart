@@ -17,20 +17,27 @@ class AuthLoginScreenState extends State<AuthLoginScreen>{
   Widget build(BuildContext ctx){
     return Scaffold(
       appBar: EpAppBar(title:"") ,
-      body:Container(
+      body:SingleChildScrollView(
+        child: Container(
         width: double.maxFinite,
-        padding: EdgeInsets.only(top: 50),
+        padding: EdgeInsets.only(top: 30),
         child: Column(
-          spacing: 50,
+
+          spacing: 20,
           children: [
-            Text("Login",style: TextStyle(fontSize: 30)),
-           
+            Text("Login",style: TextStyle(fontSize: 30,letterSpacing: 1.2)),
+           Container (
+            width: 250,
+              child: Text("Authenticate with registered email and password or with Auth provider",textAlign: TextAlign.center,style: TextStyle(fontSize: 12,)),
+           ),
             EpiInput(label: "email or username"),
             EpiInput(label: "password"),
             Column(
+              spacing: 10,
               children: [
-                AuthBtn(icon:Image.asset("assets/logo/facebook.png",width: 25,),label: "Facebook"),
-                AuthBtn(icon:Image.asset("assets/logo/google.png",width: 25,) ,label: "Google")
+                AuthBtn(icon:Image.asset("assets/logo/facebook.png",width: 30,),label: "Facebook",background: Color.fromARGB(255, 22, 130, 231),),
+                Text("or"),
+                AuthBtn(icon:Image.asset("assets/logo/google.png",width: 30,) ,label: "Google")
             
               ],
             )
@@ -44,6 +51,6 @@ class AuthLoginScreenState extends State<AuthLoginScreen>{
           ],
 
         )),
-    );
+    ));
   }
 }
