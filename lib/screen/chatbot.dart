@@ -15,11 +15,13 @@ class ChatBotStateScreen extends State<ChatBotScreen>{
         return Scaffold(
             body:Chat(
               currentUserId: "user1",
-              
+              onMessageSend:(text) =>{_chatController.insertMessage(
+                Message.text(id: "me", authorId: "you", text: text)
+              )},
                resolveUser: (UserID id)async{
                 return User(id: id,
-               createdAt:
-                )
+               createdAt:DateTime.now()
+                );
                },
                 chatController: _chatController)
         );

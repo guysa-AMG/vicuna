@@ -2,6 +2,7 @@
 
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:vicuna/screen/auth/login.dart';
+import 'package:vicuna/screen/settings.dart';
 import 'package:vicuna/widgets/appabar.dart';
 import 'package:flutter/material.dart';
 
@@ -32,10 +33,18 @@ class HomeState extends State<Home>{
       label: Text("vic"),
       
       ),
-      bottomNavigationBar: BottomNavigationBar(items: [
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (value) {
+          if (value==2){
+            Navigator.push(context, MaterialPageRoute(builder: (ctx)=>Settings()));
+          }
+        },
+        items: [
         BottomNavigationBarItem(icon: Icon(LucideIcons.chartNoAxesColumnIncreasing),label: "stats"),
          BottomNavigationBarItem(icon: Icon(LucideIcons.house),label: "home"),
-          BottomNavigationBarItem(icon: Icon(LucideIcons.settings),label: "settings"),
+          BottomNavigationBarItem(
+            
+            icon: Icon(LucideIcons.settings),label: "settings"),
       ]),
     );
   }
