@@ -32,6 +32,11 @@ class HomeState extends State<Home>{
       label: Text("vic"),
       
       ),
+      bottomNavigationBar: BottomNavigationBar(items: [
+        BottomNavigationBarItem(icon: Icon(LucideIcons.chartNoAxesColumnIncreasing),label: "stats"),
+         BottomNavigationBarItem(icon: Icon(LucideIcons.house),label: "home"),
+          BottomNavigationBarItem(icon: Icon(LucideIcons.settings),label: "settings"),
+      ]),
     );
   }
 }
