@@ -1,6 +1,5 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:vicuna/screen/chatbot.dart';
 import 'package:vicuna/screen/home.dart';
 import 'package:flutter/material.dart';
 

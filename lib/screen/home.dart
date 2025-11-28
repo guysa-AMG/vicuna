@@ -15,7 +15,6 @@ class Home extends StatefulWidget{
 
 class HomeState extends State<Home>{
   int screenIndex=0;
-  []
   @override
   Widget build(BuildContext ctx){
     return Scaffold(
@@ -28,9 +27,7 @@ class HomeState extends State<Home>{
           child: Icon(Icons.person),
           
         ))]) ,
-      body: Center(
-        child: Text("hi"),
-      ),
+      body: Text("hi"),
       floatingActionButton: FloatingActionButton.extended(onPressed: (){
         Navigator.push(context, 
         MaterialPageRoute(builder: (ctx)=>ChatBotScreen()));
@@ -41,9 +38,9 @@ class HomeState extends State<Home>{
       ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (value) {
-          if (value==2){
-            Navigator.push(context, MaterialPageRoute(builder: (ctx)=>Settings()));
-          }
+          setState(() {
+            screenIndex=value;
+          });
         },
         items: [
         BottomNavigationBarItem(icon: Icon(LucideIcons.chartNoAxesColumnIncreasing),label: "stats"),
