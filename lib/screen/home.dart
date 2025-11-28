@@ -2,6 +2,7 @@
 
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:vicuna/screen/auth/login.dart';
+import 'package:vicuna/screen/chatbot.dart';
 import 'package:vicuna/screen/settings.dart';
 import 'package:vicuna/widgets/appabar.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,8 @@ class Home extends StatefulWidget{
 }
 
 class HomeState extends State<Home>{
+  int screenIndex=0;
+  []
   @override
   Widget build(BuildContext ctx){
     return Scaffold(
@@ -28,7 +31,10 @@ class HomeState extends State<Home>{
       body: Center(
         child: Text("hi"),
       ),
-      floatingActionButton: FloatingActionButton.extended(onPressed: (){},
+      floatingActionButton: FloatingActionButton.extended(onPressed: (){
+        Navigator.push(context, 
+        MaterialPageRoute(builder: (ctx)=>ChatBotScreen()));
+      },
       icon: Icon(LucideIcons.botMessageSquare),
       label: Text("vic"),
       
