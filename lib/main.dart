@@ -1,6 +1,6 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:vicuna/screen/home.dart';
+import 'package:vicuna/screen/navbar.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
           textTheme: GoogleFonts.robotoTextTheme(),
         colorScheme: .fromSeed(seedColor: const Color(0xFF2563E0)),
       ),
-      home:  Home(),
+      home:  NavBar(),
     );
     
   }

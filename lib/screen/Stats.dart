@@ -7,19 +7,17 @@ import 'package:vicuna/screen/settings/settings.dart';
 import 'package:vicuna/widgets/appabar.dart';
 import 'package:flutter/material.dart';
 
-class Home extends StatefulWidget{
+class StatsScreen extends StatefulWidget{
 
   @override 
-  State<Home> createState()=>HomeState();
+  State<StatsScreen> createState()=>StatsScreenState();
 }
 
-class HomeState extends State<Home>{
-  int screenIndex=0;
-  List<Widget> ScreenList=[Text("stats"),Text("Home"),Text("Settings")];
-  @override
+class StatsScreenState extends State<StatsScreen>{
+ @override
   Widget build(BuildContext ctx){
     return Scaffold(
-      appBar: EpAppBar(title: "Home",trailing:[
+      appBar: EpAppBar(title: "StatsScreen",trailing:[
        GestureDetector (
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (ctx)=>AuthLoginScreen()));
@@ -28,7 +26,7 @@ class HomeState extends State<Home>{
           child: Icon(Icons.person),
           
         ))]) ,
-      body: ScreenList[screenIndex],
+      body: Text("stats"),
       floatingActionButton: FloatingActionButton.extended(onPressed: (){
         Navigator.push(context, 
         MaterialPageRoute(builder: (ctx)=>ChatBotScreen()));
