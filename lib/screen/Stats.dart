@@ -1,5 +1,6 @@
 
 
+import 'package:file_picker/file_picker.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:vicuna/screen/auth/login.dart';
 import 'package:vicuna/screen/chatbot.dart';
@@ -17,7 +18,7 @@ class StatsScreenState extends State<StatsScreen>{
  @override
   Widget build(BuildContext ctx){
     return Scaffold(
-      appBar: EpAppBar(title: "StatsScreen",trailing:[
+      appBar: EpAppBar(title: "Analyzer",trailing:[
        GestureDetector (
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (ctx)=>AuthLoginScreen()));
@@ -26,13 +27,15 @@ class StatsScreenState extends State<StatsScreen>{
           child: Icon(Icons.person),
           
         ))]) ,
-      body: Text("stats"),
-      floatingActionButton: FloatingActionButton.extended(onPressed: (){
-        Navigator.push(context, 
-        MaterialPageRoute(builder: (ctx)=>ChatBotScreen()));
+      body:
+      Center(
+        child: Text("Upload medical report")),
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterFloat,
+      floatingActionButton: FloatingActionButton(onPressed: ()async{
+       await FilePickerIO().pickFiles(type: FileType.custom,allowedExtensions: ["png","pdf","jpg","jpeg","csv"]);
       },
-      icon: Icon(LucideIcons.botMessageSquare),
-      label: Text("vic"),
+      child: Icon(LucideIcons.upload),
+    
       
       ),
     );

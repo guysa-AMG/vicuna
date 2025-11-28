@@ -1,9 +1,12 @@
 
 
+import 'dart:ffi';
+
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:vicuna/screen/auth/login.dart';
 import 'package:vicuna/screen/chatbot.dart';
 import 'package:vicuna/screen/settings/settings.dart';
+import 'package:vicuna/widgets/ChartCard.dart';
 import 'package:vicuna/widgets/appabar.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +31,28 @@ class HomeState extends State<Home>{
           child: Icon(Icons.person),
           
         ))]) ,
-      body: ScreenList[screenIndex],
+      body:
+      SingleChildScrollView(
+        child: 
+      
+      Container( height: double.maxFinite,padding: EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          spacing: 10,
+          children: [
+        
+              SearchBar(hintText: "How Are you Feeling Today?",trailing: [Icon(LucideIcons.search),SizedBox(width: 15,)],)
+              ,
+              SizedBox(height: 20,)
+            ,
+            Row(mainAxisSize: MainAxisSize.max,
+            spacing: 10,
+            children: [EpiChartCard(title: "Overview",),EpiChartCard(title: "feedback",)],
+          ),EpiChartCard(title:"follow throught"),
+
+        
+          ],
+        ),
+      )),
       floatingActionButton: FloatingActionButton.extended(onPressed: (){
         Navigator.push(context, 
         MaterialPageRoute(builder: (ctx)=>ChatBotScreen()));

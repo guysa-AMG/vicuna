@@ -23,14 +23,7 @@ class NavBarState extends State<NavBar>{
     return Scaffold(
      
       body: ScreenList[screenIndex],
-      floatingActionButton: FloatingActionButton.extended(onPressed: (){
-        Navigator.push(context, 
-        MaterialPageRoute(builder: (ctx)=>ChatBotScreen()));
-      },
-      icon: Icon(LucideIcons.botMessageSquare),
-      label: Text("vic"),
-      
-      ),
+    
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: screenIndex,
         onTap: (value) {
