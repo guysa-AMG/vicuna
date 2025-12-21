@@ -42,49 +42,51 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyD2VmR62qZ1ypG07kS9TaBcllWmGH6Lhyg',
-    appId: '1:148874881712:web:fd61090bcd9ff30b1d6975',
+    appId: '1:148874881712:web:7dc71555abad5bbd1d6975',
     messagingSenderId: '148874881712',
-    projectId: 'vicuna-8138d',
-    authDomain: 'vicuna-8138d.firebaseapp.com',
-    storageBucket: 'vicuna-8138d.firebasestorage.app',
-    measurementId: 'G-RJHYL06MNY',
+    projectId: 'victuna-8138d',
+    authDomain: 'victuna-8138d.firebaseapp.com',
+    storageBucket: 'victuna-8138d.firebasestorage.app',
+    measurementId: 'G-X6F5Y5HRTW',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyByKh48fnIkkiPquyEOnHKBFaSWozJLXw4',
-    appId: '1:148874881712:android:a9ed92650e6b327a1d6975',
+    appId: '1:148874881712:android:bb024d85073fcd6a1d6975',
     messagingSenderId: '148874881712',
-    projectId: 'vicuna-8138d',
-    storageBucket: 'vicuna-8138d.firebasestorage.app',
+    projectId: 'victuna-8138d',
+    storageBucket: 'victuna-8138d.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyB6jN9VsqQZ5ytHG6FKV9cw6fpuvldeq6Y',
-    appId: '1:148874881712:ios:951a3b26a096b40c1d6975',
+    appId: '1:148874881712:ios:de451eb8c442426c1d6975',
     messagingSenderId: '148874881712',
-    projectId: 'vicuna-8138d',
-    storageBucket: 'vicuna-8138d.firebasestorage.app',
-    iosClientId: '148874881712-t97evcdird54758q3d5o53obutmmq4ia.apps.googleusercontent.com',
-    iosBundleId: 'za.medi.vicuna.vicuna',
+    projectId: 'victuna-8138d',
+    storageBucket: 'victuna-8138d.firebasestorage.app',
+    iosClientId:
+        '148874881712-36fei39p6lju3iihr6t4ailk7mke0lsf.apps.googleusercontent.com',
+    iosBundleId: 'za.medi.vicuna',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyB6jN9VsqQZ5ytHG6FKV9cw6fpuvldeq6Y',
-    appId: '1:148874881712:ios:951a3b26a096b40c1d6975',
+    appId: '1:148874881712:ios:c5a1538b508962201d6975',
     messagingSenderId: '148874881712',
-    projectId: 'vicuna-8138d',
-    storageBucket: 'vicuna-8138d.firebasestorage.app',
-    iosClientId: '148874881712-t97evcdird54758q3d5o53obutmmq4ia.apps.googleusercontent.com',
+    projectId: 'victuna-8138d',
+    storageBucket: 'victuna-8138d.firebasestorage.app',
+    iosClientId:
+        '148874881712-8fiiej8qr6ni7evl35ufv8rdfsip7b77.apps.googleusercontent.com',
     iosBundleId: 'za.medi.vicuna.vicuna',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
     apiKey: 'AIzaSyD2VmR62qZ1ypG07kS9TaBcllWmGH6Lhyg',
-    appId: '1:148874881712:web:7dc71555abad5bbd1d6975',
+    appId: '1:148874881712:web:69e8ec994a79098f1d6975',
     messagingSenderId: '148874881712',
-    projectId: 'vicuna-8138d',
-    authDomain: 'vicuna-8138d.firebaseapp.com',
-    storageBucket: 'vicuna-8138d.firebasestorage.app',
-    measurementId: 'G-X6F5Y5HRTW',
+    projectId: 'victuna-8138d',
+    authDomain: 'victuna-8138d.firebaseapp.com',
+    storageBucket: 'victuna-8138d.firebasestorage.app',
+    measurementId: 'G-2LXD8RMN1Y',
   );
 }

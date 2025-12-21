@@ -1,13 +1,49 @@
 {
   "project_info": {
     "project_number": "148874881712",
-    "project_id": "vicuna-8138d",
-    "storage_bucket": "vicuna-8138d.firebasestorage.app"
+    "project_id": "victuna-8138d",
+    "storage_bucket": "victuna-8138d.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
         "mobilesdk_app_id": "1:148874881712:android:a9ed92650e6b327a1d6975",
+        "android_client_info": {
+          "package_name": "za.medi.epicrisis.epicrisis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "148874881712-toqp4aokiamieq125lqfht5b6so26d3k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByKh48fnIkkiPquyEOnHKBFaSWozJLXw4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "148874881712-toqp4aokiamieq125lqfht5b6so26d3k.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "148874881712-t97evcdird54758q3d5o53obutmmq4ia.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "za.medi.epicrisis.epicrisis"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:148874881712:android:bb024d85073fcd6a1d6975",
         "android_client_info": {
           "package_name": "za.medi.vicuna"
         }
@@ -29,6 +65,13 @@
             {
               "client_id": "148874881712-toqp4aokiamieq125lqfht5b6so26d3k.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "148874881712-t97evcdird54758q3d5o53obutmmq4ia.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "za.medi.epicrisis.epicrisis"
+              }
             }
           ]
         }

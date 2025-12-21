@@ -1,43 +1,53 @@
-
-
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:vicuna/screen/Stats.dart';
-import 'package:vicuna/screen/auth/login.dart';
-import 'package:vicuna/screen/chatbot.dart';
 import 'package:vicuna/screen/home.dart';
+import 'package:vicuna/screen/miscscreen.dart';
 import 'package:vicuna/screen/settings/settings.dart';
-import 'package:vicuna/widgets/appabar.dart';
 import 'package:flutter/material.dart';
 
-class NavBar extends StatefulWidget{
-
-  @override 
-  State<NavBar> createState()=>NavBarState();
+class NavBar extends StatefulWidget {
+  @override
+  State<NavBar> createState() => NavBarState();
 }
 
-class NavBarState extends State<NavBar>{
-  int screenIndex=1;
-  List<Widget> ScreenList=[StatsScreen(),Home(),Settings()];
+class NavBarState extends State<NavBar> {
+  int screenIndex = 0;
+  List<Widget> ScreenList = [
+   MiscScreen()// Home()
+    , StatsScreen(), Settings()];
   @override
-  Widget build(BuildContext ctx){
+  Widget build(BuildContext ctx) {
     return Scaffold(
-     
       body: ScreenList[screenIndex],
-    
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: screenIndex,
-        onTap: (value) {
+
+      bottomNavigationBar: NavigationBar(
+        indicatorShape: StadiumBorder(),
+        selectedIndex: screenIndex,
+        onDestinationSelected: (value) {
           setState(() {
-            screenIndex=value;
+            screenIndex = value;
           });
         },
-        items: [
-        BottomNavigationBarItem(icon: Icon(LucideIcons.chartNoAxesColumnIncreasing),label: "stats"),
-         BottomNavigationBarItem(icon: Icon(LucideIcons.house),label: "Home"),
-          BottomNavigationBarItem(
-            
-            icon: Icon(LucideIcons.settings),label: "settings"),
-      ]),
+        destinations: [
+          NavigationDestination(
+            icon: Icon(LucideIcons.house100),
+
+            selectedIcon: Icon(LucideIcons.house400, fill: 1),
+            label: "Home",
+          ),
+
+          NavigationDestination(
+            selectedIcon: Icon(LucideIcons.chartArea400, fill: 1),
+            icon: Icon(LucideIcons.chartArea100),
+            label: "stats",
+          ),
+          NavigationDestination(
+            icon: Icon(LucideIcons.settings100),
+            selectedIcon: Icon(LucideIcons.settings400, fill: 1),
+            label: "settings",
+          ),
+        ],
+      ),
     );
   }
 }

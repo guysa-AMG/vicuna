@@ -1,8 +1,8 @@
 name: vicuna
-description: "A new Flutter project."
+description: "Vicuna md is a medication explainer"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'playstore' # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+version: 0.0.2+2
 
 environment:
   sdk: ^3.10.1
@@ -48,6 +48,18 @@ dependencies:
   firebase_core: ^4.2.1
   flutter_chat_ui: ^2.9.1
   flutter_chat_core: ^2.8.0
+  firebase_auth: ^6.1.2
+  flutter_facebook_auth: ^7.1.2
+  flutter_html: ^3.0.0
+  shared_preferences: ^2.5.3
+  google_sign_in: ^7.2.0
+  flutter_gemini: ^3.0.0
+  local_auth: ^3.0.0
+  cross_file: ^0.3.5+1
+  llama_cpp_dart: ^0.1.2+1
+  path_provider: ^2.1.5
+  dio: ^5.9.0
+  crypto: ^3.0.7
 
 dev_dependencies:
   flutter_test:
@@ -59,6 +71,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
+  flutter_native_splash: ^2.4.7
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -75,6 +88,7 @@ flutter:
   assets:
   - assets/logo/google.png
   - assets/logo/facebook.png
+  - assets/logo/logo.png
   #   - images/a_dot_ham.jpeg
 
 
