@@ -39,7 +39,7 @@ pipeline {
     }
     post {
         always {
-            sh "rm -f ${env.WORKSPACE}/android/app/upload-keystore.jks"
+           steps { sh "rm -f ${env.WORKSPACE}/android/app/upload-keystore.jks"}
         }
     }
 }
