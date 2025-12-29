@@ -3,8 +3,8 @@ pipeline {
     environment {
         // Mapping Secret Text IDs from your screenshot
         UPLOAD_KEY_ALIAS      = credentials('keyAlias')
-        UPLOAD_KEY_PASSWORD   = credentials('keyPassword')
-        UPLOAD_STORE_PASSWORD  = credentials('storePassword')
+        UPLOAD_KEY_PASSWORD   = credentials('keyPass')
+        UPLOAD_STORE_PASSWORD  = credentials('storePass')
     }
     stages {
         stage('Checkout') {
@@ -14,7 +14,7 @@ pipeline {
             steps {
                 // Handling Secret Files from your screenshot
                 withCredentials([
-                    file(credentialsId: 'UPLOAD_KEYSTORE_FILE', variable: 'JKS_PATH'),
+                    file(credentialsId: 'UPLOAD_KEYSTORE_FILE2', variable: 'JKS_PATH'),
                     file(credentialsId: 'GPLAY_JSON_KEY', variable: 'GPLAY_JSON_PATH')
                 ]) {
                     script {
