@@ -29,18 +29,13 @@ class Home extends StatefulWidget {
 class HomeState extends State<Home> {
   int screenIndex = 0;
   List<XFile> uploadedFiles = [];
-  List<Widget> ScreenList = [Text("stats"), Text("Home"), Text("Settings")];
 
   void rmvd(XFile file) {
     setState(() {
       uploadedFiles.remove(file);
     });
   }
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
+ 
 
   @override
   Widget build(BuildContext ctx) {
@@ -50,7 +45,7 @@ class HomeState extends State<Home> {
         return Scaffold(
           appBar: EpAppBar(
             title: state is SuccessFullAuthenticationState
-                ? "Hi \n" + (state.userCred.displayName ?? "User")
+                 ?"Hi \n  ${state.userCred.displayName ?? "User"}"
                 : "Welcome",
             trailing: [UserIcon()],
           ),
@@ -165,13 +160,20 @@ class HomeState extends State<Home> {
                  }
               
                else{
-               BlocBuilder<QuickAnalysisController, Analystate>(
+             return  BlocBuilder<QuickAnalysisController, Analystate>(
                     builder: (context, state) {
-                      return (state is SuccessfulAnalysisState)
-                          ? ReportCard(report: state.report)
-                          : (state is LoadingAnalysisState)
-                          ? LoadingWidget()
-                          : uploadedFiles.isNotEmpty
+
+                      switch(state){
+
+                        case SuccessfulAnalysisState():
+                          return ReportCard(report: state.report,);
+
+                        case LoadingAnalysisState():
+                          return LoadingWidget();
+
+                      }
+                      return 
+                           uploadedFiles.isNotEmpty
                           ? FileViewer(files: uploadedFiles, onDelete: rmvd)
                           : SizedBox(
                               height: height * 0.6,
@@ -295,7 +297,14 @@ class HomeState extends State<Home> {
           // ... rest of Scaffold floatingActionButtonLocation:
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: Container(
+          floatingActionButton:
+          
+          BlocBuilder<LLMController,ModelState>(
+            builder: (ctx,state)
+            {
+              
+               if(ctx.read<LLMController>().ismodelOnDevice){
+                return Container(
             decoration: BoxDecoration(
               color: Theme.of(context).cardColor,
               borderRadius: BorderRadius.all(VicunaVar.borderRadius),
@@ -396,7 +405,10 @@ class HomeState extends State<Home> {
                       ),
                     ),
                   ),
-          ),
+          );}
+          return SizedBox() ;
+          }),
+      
         );
       },
     );

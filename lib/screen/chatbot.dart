@@ -2,10 +2,13 @@ import 'dart:math';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chat_core/flutter_chat_core.dart';
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
+import 'package:vicuna/services/blocs/controllers/aimodelcontroller.dart';
+import 'package:vicuna/services/blocs/states/modelstate.dart';
 import 'package:vicuna/services/repository/localpref.dart';
 import 'package:vicuna/widgets/appabar.dart';
 
@@ -22,6 +25,8 @@ class ChatBotStateScreen extends State<ChatBotScreen> {
   @override
   void initState() {
     super.initState();
+
+
     targetLanguage = RepositoryProvider.of<LocalInstance>(context).Language;
     if (super.widget.InitialMessage != null) {
       //message on initial message routed from home screen.
@@ -35,11 +40,18 @@ class ChatBotStateScreen extends State<ChatBotScreen> {
 
       _chatController.insertMessage(tm);
       respond(tm.text);
+
+
     }
   }
 
+
   respond(message) async {
-    Candidates? can = await Gemini.instance.chat(
+
+    await context.read<LLMController>().sendChat(message);
+
+  }
+tem(message)async{    Candidates? can = await Gemini.instance.chat(
       [
         ...[
           Content(
@@ -58,7 +70,6 @@ class ChatBotStateScreen extends State<ChatBotScreen> {
    5. communicate in $targetLanguage
    ''',
     );
-    // Candidates? can= await Gemini.instance.prompt(parts: [Part.text(message)]);
     _chatController.insertMessage(
       TextMessage(
         id: "${Random().nextInt(100) + 1}",
@@ -71,7 +82,18 @@ class ChatBotStateScreen extends State<ChatBotScreen> {
 
   @override
   Widget build(BuildContext ctx) {
-    return Scaffold(
+    return BlocListener<LLMController,ModelState>(
+      listener: (cont,state){
+        switch(state){
+          case LoadingModelState():
+            _chatController.insertMessage(Message.system(id: "000", authorId: "boot", text: ""));
+          case NewContentModelState():
+            _chatController.insertMessage(Message.text(id: state.cont.hashCode.toString(), authorId: "mark", text: state.cont));
+
+                  }
+      },
+    
+   child: Scaffold(
       appBar: EpAppBar(title: "Vicuna AI"),
       body: Chat(
         currentUserId: "user1",
@@ -82,6 +104,7 @@ class ChatBotStateScreen extends State<ChatBotScreen> {
           typography: ChatTypography.fromThemeData(Theme.of(context)),
           shape: BorderRadiusGeometry.circular(5),
         ),
+     
         onMessageSend: (text) {
           _chatController.insertMessage(
             TextMessage(
@@ -93,7 +116,7 @@ class ChatBotStateScreen extends State<ChatBotScreen> {
           );
           respond(text);
         },
-
+          
         onAttachmentTap: () async {
           await FilePickerIO().pickFiles(
             type: FileType.custom,
@@ -105,6 +128,15 @@ class ChatBotStateScreen extends State<ChatBotScreen> {
         },
         chatController: _chatController,
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startDocked,
+      floatingActionButton:
+      Animate(
+        child: Container(width: 120, height: 70,),
+effects: [ShimmerEffect()],
+      )
+     ,
+    )
+    
     );
   }
 }

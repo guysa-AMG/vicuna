@@ -11,8 +11,15 @@ class DownloadingModelState extends ModelState {
   DownloadingModelState({required this.percentage,this.hash});
 }
 
-class ModelLoadedState extends ModelState {}
+class ModelLoadedState extends ModelState {
+  String chat;
+  ModelLoadedState({required this.chat});
+}
 
+class NewContentModelState extends ModelState{
+  String cont;
+  NewContentModelState({required this.cont});
+}
 class ErrorLoadingModelState extends ModelState {
   String? error;
   ErrorLoadingModelState({this.error});

@@ -29,7 +29,7 @@ void main() async {
   //final model = await FlutterGemma.getActiveModel(maxTokens: 2048);
   LocalInstance local = LocalInstance();
   VicunaAi vicAi = VicunaAi();
-
+  await vicAi.init();
   await local.init();
   runApp(
     DevicePreview(
@@ -137,7 +137,7 @@ class MyApp extends StatelessWidget {
           ),
           themeMode: (state is LightTheme) ? ThemeMode.light : ThemeMode.dark,
 
-          home: MiscScreen(),
+          home: NavBar(),
         );
       },
     );

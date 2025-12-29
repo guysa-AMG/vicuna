@@ -1,43 +1,34 @@
 import 'dart:async';
 import 'dart:io';
-
-import 'package:crypto/crypto.dart';
+import 'dart:isolate';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
-import 'package:llama_cpp_dart/llama_cpp_dart.dart';
+import 'package:flutter_gemma/flutter_gemma.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vicuna/services/nativelibs/nathash.dart';
 
 class VicunaAi {
-  Llama? _llama;
+  InferenceModel? model;
   bool isLoaded = false;
   String? modelHash;
-  final String _urlmodelpath = "http://192.168.100.32:8044/models/llama3.2";
+  final String _urlmodelpath = "http://192.168.100.32:8044/gemma-2b-it-cpu-int4.bin";
 
-  Future<bool> get hasModel async {
-    Directory appdir = await getApplicationDocumentsDirectory();
-    String fdir = "${appdir.path}/model.gguf";
-    await modelChecksum();
-    return await File(fdir).exists();
+  bool get hasModel  {
+
+    return  FlutterGemma.hasActiveModel();
   }
 
   @protected
   Future<String> getModelPath() async {
     Directory appdir = await getApplicationDocumentsDirectory();
     String fdir = "${appdir.path}/model.gguf";
-    if (File(fdir).existsSync()) {
-      return fdir;
-    } else {
-      ByteData mod = await rootBundle.load("assets/model/model.gguf");
-      File nfdir = File(fdir);
-      await nfdir.writeAsBytes(
-        mod.buffer.asUint8List(mod.offsetInBytes, mod.lengthInBytes),
-      );
-      return fdir;
+  return fdir; 
     }
+  
+  Future<void> init()async{
+   await FlutterGemma.initialize();
   }
-
 
 Future <bool> modelChecksum()async{
   String currentHash;
@@ -62,15 +53,11 @@ Future <bool> modelChecksum()async{
    Directory appdir = await getApplicationDocumentsDirectory();
    String fdir = "${appdir.path}/model.gguf";
 
-   File modelff=File(fdir);
-  
- final modelStream = modelff.openRead();
- final chash = await sha256.bind(modelStream).first;
-  
-  debugPrint("calculated model hash :${chash.toString()}");
+   String chash= await Isolate.run(() => CHash.getSHA256(fdir));
+  debugPrint("calculated model hash :$chash");
   debugPrint("given model hash :$currentHash");
   
-  return chash.toString()==currentHash;
+  return chash==currentHash;
 
 
   
@@ -80,7 +67,7 @@ Future<void> saveHash(String hsh)async{
  SharedPreferences shared= await SharedPreferences.getInstance();
  shared.setString("checksum", hsh);
 }
-  Stream<double> downloadModel() {
+  Stream<double> downloadModel1() {
     final controller = StreamController<double>();
 
     Future<void> startDownload() async {
@@ -108,7 +95,42 @@ Future<void> saveHash(String hsh)async{
         debugPrint("HASH == $modelHash");
 
         if (modelHash != null){
-        await saveHash(modelHash!);}
+        await saveHash(modelHash!);
+        
+        }
+
+        controller.close();
+      } catch (e) {
+        debugPrint(e.toString());
+        controller.addError(e);
+        controller.close();
+        rethrow;
+      }
+    }
+
+    startDownload();
+    return controller.stream;
+  }
+ Stream<double> downloadModel() {
+    final controller = StreamController<double>();
+
+    Future<void> startDownload() async {
+    
+
+      try {
+
+  
+      
+ await FlutterGemma.installModel(
+      modelType: ModelType.gemmaIt,
+      fileType: ModelFileType.binary)
+      .fromNetwork(_urlmodelpath)
+      .withProgress((progress) {
+         controller.add((progress.toDouble()));
+      },)
+      .install()  ;
+      
+       
 
         controller.close();
       } catch (e) {
@@ -124,31 +146,36 @@ Future<void> saveHash(String hsh)async{
   }
 
   Future<bool> loadModel() async {
-    try {
-      String mpath = await getModelPath();
-
-      // nCtx = 2048 is standard. Reduce to 1024 if app crashes on older phones.
-      final contextParams = ContextParams()..nCtx = 2048;
-      _llama = Llama(mpath, ModelParams(), contextParams);
-      isLoaded = true;
-      return true;
-    } catch (e) {
-      debugPrint(e.toString());
-      return false;
-    }
+if (FlutterGemma.hasActiveModel()){
+model =await  FlutterGemma.getActiveModel(
+    maxTokens: 1024,
+    preferredBackend: PreferredBackend.cpu
+  );
+  return true;
+}
+return false;
   }
 
-  void dispose() {
-    _llama?.dispose();
+Future<String> sendChat(String message) async {
+   if(model==null){
+  bool  ret =await loadModel();
+  if (!ret){
+    return "failed to Load";
   }
+   }
+   final chat = await model!.createChat();
+    var Language = "English";
+    var sys_prompt='''
+   1. you are a medical note explainer named Vicuna
+   2. you help patients find health information and do not engage in unrelated topics 
+   3. only respond if you are 89% sure or state you are not sure
+   4.  it short simple,
+   5. communicate in $Language''';
+  
+await chat.addQueryChunk(Message.text(text: message,isUser: true));
 
-  Stream<String> sendChat(String message) async* {
-    if (isLoaded) {
-      _llama!.setPrompt(message);
+TextResponse res=await chat.generateChatResponse() as TextResponse;
 
-      await for (final pmt in _llama!.generateText()) {
-        yield pmt;
-      }
-    }
+return res.token;
   }
 }

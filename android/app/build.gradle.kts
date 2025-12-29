@@ -41,6 +41,7 @@ android {
 
         externalNativeBuild {
             cmake {
+                abiFilters("arm64-v8a")
                 // Kotlin requires string arguments for cppFlags
                 cppFlags("-std=c++11", "-frtti", "-fexceptions")
             }
@@ -49,15 +50,21 @@ android {
     }
     externalNativeBuild{
         cmake{
-            path = file("../../native/CMakeLists.txt")
+           
+ path = file("../../native/CMakeLists.txt")
+
         }
     }
     signingConfigs {
         create("release") {
-            keyAlias = keystoreProperties["keyAlias"] as String
-            keyPassword = keystoreProperties["keyPassword"] as String
-            storeFile = keystoreProperties["storeFile"]?.let { file(it) }
-            storePassword = keystoreProperties["storePassword"] as String
+          val keystorePath = System.getenv("UPLOAD_KEYSTORE_FILE_PATH") ?: keystoreProperties.getProperty("storeFile")
+            
+            if (keystorePath != null) {
+                storeFile = file(keystorePath)
+                storePassword = System.getenv("UPLOAD_STORE_PASSWORD") ?: keystoreProperties.getProperty("storePassword")
+                keyAlias = System.getenv("UPLOAD_KEY_ALIAS") ?: keystoreProperties.getProperty("keyAlias")
+                keyPassword = System.getenv("UPLOAD_KEY_PASSWORD") ?: keystoreProperties.getProperty("keyPassword")
+            }
         }
     }
 

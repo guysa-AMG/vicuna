@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:isolate';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:your_app/native_bridge.dart'; // Import your FFI class
+import 'package:vicuna/services/nativelibs/nathash.dart';
 
 void main() {
   test('Verify C++ SHA-256 calculation', () async {
@@ -12,10 +12,10 @@ void main() {
 
     const expectedHash = "4e6d425712e1286a1177656608889b91764619a86f9160533349942d7657d428";
 
-    final resultHash = await Isolate.run(() => NativeValidator.calculateFileHash(file.path));
+    final resultHash = await Isolate.run(() => CHash.getSHA256(file.path));
 
     print("Expected: $expectedHash");
-    print("Actual:   $resultHash");t addd .
+    print("Actual:   $resultHash");
     
     expect(resultHash.toLowerCase(), expectedHash);
   });

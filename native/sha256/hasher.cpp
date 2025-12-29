@@ -4,7 +4,9 @@
 #include <fstream>
 #include <vector>
 
-#include "sha256.h"
+extern "C" {
+    #include "sha256.h"
+}
 
 extern "C" __attribute__((visibility("default"))) __attribute__((used))
 void compute_checksum(const char* path , unsigned char* ohash){
@@ -12,7 +14,7 @@ void compute_checksum(const char* path , unsigned char* ohash){
     if (!file.is_open()) return ;
 
     SHA256_CTX sha256;
-    SHA256_Init(&sha256);
+    sha256_init(&sha256);
 
     constexpr size_t bufferSize = 1024 * 1024;
 
@@ -21,8 +23,8 @@ void compute_checksum(const char* path , unsigned char* ohash){
     while (file.read(reinterpret_cast<char *> (buffer.data()),bufferSize) || file.gcount()>0){
        std::streamsize readSize = file.gcount();
        if (readSize>0){
-        SHA256_Update(&sha256,buffer.data(),static_cast<size_t>(readSize));
+        sha256_update(&sha256,buffer.data(),static_cast<size_t>(readSize));
        }
     }
-    SHA256_Final(ohash,&sha256);
+    sha256_final(&sha256,ohash);
 }

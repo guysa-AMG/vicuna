@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gemma/flutter_gemma.dart';
 import 'package:vicuna/services/blocs/states/modelstate.dart';
+import 'package:vicuna/services/nativelibs/nathash.dart';
 import 'package:vicuna/services/repository/aimodel.dart';
 import 'package:vicuna/services/repository/localpref.dart';
 
@@ -15,15 +17,15 @@ class LLMController extends Cubit<ModelState> {
   LLMController({required this.vicai,required this.pref}) : super(InitModelState());
 
   bool get ismodelOnDevice  {
-    return pref.hasValidLocalModel();
+    return vicai.hasModel;
   }
 
   void loadModel() async {
-    if (await vicai.hasModel) {}
+    if (vicai.hasModel) {}
 
     bool res = await vicai.loadModel();
     if (res) {
-      emit(ModelLoadedState());
+      emit(ModelLoadedState(chat: ""));
       return;
     } else {
 
@@ -31,35 +33,36 @@ class LLMController extends Cubit<ModelState> {
       return;
     }
   }
-  void validateModel()async{
-    
-    bool val =await vicai.modelChecksum();
-     debugPrint("All Good");
-   if(val){
-   
-    pref.setValidityLocalModel(true);
-    emit(ModelLoadedState());
-   }
+ Future <void> sendChat(String message)async{
+
+  emit(LoadingModelState());
+
+ 
+   String response =await vicai.sendChat(message);
+
+   emit(NewContentModelState (cont: response));
   }
+
   void pullModel() async {
     debugPrint("Pull initiated !!!!!!!!!!!!!!");
     emit(DownloadingModelState(percentage: 0));
 
-    vicai
+  await  vicai
         .downloadModel()
         .listen((event) {
           emit(DownloadingModelState(percentage: event));
-        }).onError((e)=>{
+        }).asFuture().onError((e,_)=>{
           if (e.toString().startsWith(ERRORS[0])){
           emit(ErrorLoadingModelState(error: "Server Error 404: Could Not Download Model"))}
           else{
             emit(ErrorLoadingModelState(error: e.toString()))
           }
         });
-        bool val =await vicai.modelChecksum();
-   if(val){
+        //bool val =await vicai.modelChecksum();
+           emit(ModelLoadedState(chat: ""));
+   if(false){//val){
     pref.setValidityLocalModel(true);
-    emit(ModelLoadedState());
+    emit(ModelLoadedState(chat: ""));
    }
    
         

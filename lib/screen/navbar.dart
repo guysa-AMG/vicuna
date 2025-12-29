@@ -12,9 +12,7 @@ class NavBar extends StatefulWidget {
 
 class NavBarState extends State<NavBar> {
   int screenIndex = 0;
-  List<Widget> ScreenList = [
-   MiscScreen()// Home()
-    , StatsScreen(), Settings()];
+  List<Widget> ScreenList = [Home(), StatsScreen(), Settings()];
   @override
   Widget build(BuildContext ctx) {
     return Scaffold(
