@@ -1,6 +1,6 @@
 # vicuna
 
-Vicuna Med is a safe personal AI Medical transcriber
+Vicuna Med is a safe personal AI Medical transcriber. and a personal assistant to help you medically .
 
 ## Getting Started
 
