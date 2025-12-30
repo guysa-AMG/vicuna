@@ -39,6 +39,13 @@ pipeline {
         }
     }
     post {
+		success{
+			echo "Successfully built and deployed to playstore"
+		}
+		failure{
+			echo "Pipline Failed Please Review and Fix the Issue to continue"
+		}
+			
         always {
            script {
 		 node {
