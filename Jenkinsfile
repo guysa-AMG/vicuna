@@ -18,6 +18,8 @@ pipeline {
                     file(credentialsId: 'GPLAY_JSON_KEY', variable: 'GPLAY_JSON_PATH')
                 ]) {
                     script {
+			RUN chown -R jenkins:jenkins /var/jenkins_home
+			sh "chmod 777 ${env.WORKSPACE}/android/app"
                         // 1. Copy Keystore to the app folder for Gradle
                         sh "cp \$JKS_PATH ${env.WORKSPACE}/android/app/upload-keystore.jks"
                         env.UPLOAD_KEYSTORE_FILE_PATH = "${env.WORKSPACE}/android/app/upload-keystore.jks"
