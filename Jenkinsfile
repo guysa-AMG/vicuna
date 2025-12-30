@@ -30,7 +30,8 @@ pipeline {
         }
         stage('Build & Deploy') {
             steps {
-                sh "flutter pub get"
+                sh "git config --global --add safe.directory /opt/flutter"
+		sh "flutter pub get"
                 dir('android') {
                     sh "bundle exec fastlane deploy build_number:${env.BUILD_NUMBER}"
                 }
@@ -47,3 +48,4 @@ pipeline {
         }
     }
 }
+
