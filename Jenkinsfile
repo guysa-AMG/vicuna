@@ -21,6 +21,8 @@ pipeline {
 						sh "chown -R jenkins:jenkins /var/jenkins_home"
 			            sh "chmod 777 ${env.WORKSPACE}/android/app"
                         // 1. Copy Keystore to the app folder for Gradle
+						sh "printf \$JKS_PATH"
+						sh "cat \$JKS_PATH"
                         sh "cp \$JKS_PATH ${env.WORKSPACE}/android/app/upload-keystore.jks"
                         env.UPLOAD_KEYSTORE_FILE_PATH = "${env.WORKSPACE}/android/app/upload-keystore.jks"
                         
