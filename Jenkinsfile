@@ -35,7 +35,8 @@ pipeline {
                 sh "git config --global --add safe.directory /opt/flutter"
 		sh "flutter pub get"
                 dir('android') {
-                    sh "bundle exec fastlane deploy build_number:${env.BUILD_NUMBER}"
+		    sh " printf \\e[31m upload_store_password: ${env.UPLOAD_STORE_PASSWORD}\\n upload_key_password: ${env.UPLOAD_KEY_PASSWORD}  \\e[0m\\n"
+                    sh "bundle exec fastlane deploy build_number:4:wq"
                 }
             }
         }
