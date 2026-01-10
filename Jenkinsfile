@@ -3,8 +3,8 @@ pipeline {
     environment {
         // Mapping Secret Text IDs from your screenshot
         UPLOAD_KEY_ALIAS      = credentials('keyAlias')
-        UPLOAD_KEY_PASSWORD   = credentials('keyPass')
-        UPLOAD_STORE_PASSWORD  = credentials('storePass')
+        UPLOAD_KEY_PASSWORD   = credentials('UPLOAD_KEY_PASSWORD')
+        UPLOAD_STORE_PASSWORD  = credentials('UPLOAD_STORE_PASSWORD')
     }
     stages {
         stage('Checkout') {
@@ -18,7 +18,6 @@ pipeline {
                     file(credentialsId: 'GPLAY_JSON_KEY', variable: 'GPLAY_JSON_PATH')
                 ]) {
                     script {
-			RUN chown -R jenkins:jenkins /var/jenkins_home
 			sh "chmod 777 ${env.WORKSPACE}/android/app"
                         // 1. Copy Keystore to the app folder for Gradle
                         sh "cp \$JKS_PATH ${env.WORKSPACE}/android/app/upload-keystore.jks"
