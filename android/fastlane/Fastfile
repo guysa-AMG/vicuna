@@ -9,7 +9,6 @@ lane  :deploy do |options|
 
   upload_to_play_store(
     track: "closed",
-    aab: "../build/app/outputs/bundle/release/app-release.aab",
-    json_key_data: ENV["GPLAY_JSON_PATH"]
+    aab: "../build/app/outputs/bundle/release/app-release.aab"
   )
 end
