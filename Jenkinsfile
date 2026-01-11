@@ -39,6 +39,8 @@ pipeline {
                 ]){
 					 
 					 script{
+
+						 env.GPLAY_JSON_PATH="${GPLAY_JSON_PATH}"
 						 sh "git config --global --add safe.directory /opt/flutter"
 		sh "flutter pub get"
                 dir('android') {
