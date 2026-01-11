@@ -37,12 +37,16 @@ pipeline {
                     file(credentialsId: 'UPLOAD_KEYSTORE_FILE2', variable: 'JKS_PATH'),
                     file(credentialsId: 'GPLAY_JSON_KEY', variable: 'GPLAY_JSON_PATH')
                 ]){
-                sh "git config --global --add safe.directory /opt/flutter"
+					 
+					 script{
+						 sh "git config --global --add safe.directory /opt/flutter"
 		sh "flutter pub get"
                 dir('android') {
 		    sh " printf \\e[31m upload_store_password: ${env.UPLOAD_STORE_PASSWORD}\\n upload_key_password: ${env.UPLOAD_KEY_PASSWORD}  \\e[0m\\n"
                     sh "bundle exec fastlane deploy build_number:4"
                 }
+				 }
+					 
 				 }
             }
         }
@@ -58,7 +62,7 @@ pipeline {
         always {
            script {
 		 node {
-			sh "rm -f ${env.WORKSPACE}/android/app/upload-keystore.jks"
+			sh "rm -rf ${env.WORKSPACE}/android/app/upload-keystore.jks"
 		   }
 		  }
         }
