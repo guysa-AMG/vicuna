@@ -1,3 +1,14 @@
+lane :check_path do
+  path = CredentialsManager::AppfileConfig.try_fetch_value(:json_key_file)
+  UI.message("Fastlane is looking for the key at: #{File.expand_path(path)}")
+  
+  if File.exist?(path)
+    UI.success("✅ File found!")
+  else
+    UI.error("❌ File NOT found at that path.")
+  end
+end
+
 lane  :deploy do |options|
   # Retrieve the build number passed from Jenkins
   # If it's missing (local build), it defaults to 1
