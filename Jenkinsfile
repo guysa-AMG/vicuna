@@ -34,14 +34,13 @@ pipeline {
         stage('Build & Deploy') {
             steps {
 				 withCredentials([
-                    file(credentialsId: 'UPLOAD_KEYSTORE_FILE2', variable: 'JKS_PATH'),
                     file(credentialsId: 'GPLAY_JSON_KEY', variable: 'GPLAY_JSON_PATH')
                 ]){
 					 
 					 script{
 
 						
-						 sh "cat ${GPLAY_JSON_FILE_PATH}"
+						 sh "cp ${GPLAY_JSON_FILE_PATH} ${env.WORKSPACE}/android/fastlane/service.json"
 						 sh "git config --global --add safe.directory /opt/flutter"
 		sh "flutter pub get"
                 dir('android') {
@@ -65,6 +64,7 @@ pipeline {
         always {
            script {
 		 node {
+			sh "rm -rf  ${env.WORKSPACE}/android/fastlane/service.json"
 			sh "rm -rf ${env.WORKSPACE}/android/app/upload-keystore.jks"
 		   }
 		  }
