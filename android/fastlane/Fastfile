@@ -1,11 +1,19 @@
 lane :check_path do
+  # This tries to fetch from Appfile
   path = CredentialsManager::AppfileConfig.try_fetch_value(:json_key_file)
-  UI.message("Fastlane is looking for the key at: #{File.expand_path(path)}")
   
-  if File.exist?(path)
-    UI.success("✅ File found!")
+  if path.nil?
+    UI.error("❌ Appfile is NOT returning a value for json_key_file. Check your Appfile syntax.")
   else
-    UI.error("❌ File NOT found at that path.")
+    UI.message("Fastlane found the path in Appfile: #{path}")
+    expanded_path = File.expand_path(path)
+    UI.message("Full absolute path: #{expanded_path}")
+    
+    if File.exist?(path)
+      UI.success("✅ SUCCESS: File exists at that location!")
+    else
+      UI.error("❌ ERROR: Path is set, but the file is missing at: #{expanded_path}")
+    end
   end
 end
 
