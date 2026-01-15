@@ -40,7 +40,7 @@ pipeline {
 					 script{
 
 						
-						 sh "cp \$GPLAY_JSON_FILE_PATH ${env.WORKSPACE}/android/fastlane/service.json"
+						 sh "cp ${GPLAY_JSON_PATH} ${env.WORKSPACE}/android/fastlane/service.json"
 						 sh "git config --global --add safe.directory /opt/flutter"
 		sh "flutter pub get"
                 dir('android') {
