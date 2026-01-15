@@ -27,7 +27,7 @@ lane  :deploy do |options|
 
 
   upload_to_play_store(
-    track: "closed",
+    track: "ciu",
     aab: "../build/app/outputs/bundle/release/app-release.aab"
   )
 end
