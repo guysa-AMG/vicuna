@@ -56,9 +56,11 @@ pipeline {
     post {
 		success{
 			echo "Successfully built and deployed to playstore"
+            sh "python3 messagebot/main.py -m Successfully deployed to playstore"
 		}
 		failure{
 			echo "Pipline Failed Please Review and Fix the Issue to continue"
+            sh "python3 messagebot/main.py -m Successfully deployed to playstore"
 		}
 			
         always {

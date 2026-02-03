@@ -29,10 +29,7 @@ late Future<bool> loaded;
 
     return
      Scaffold(
-      body:
-      
-      
-      FutureBuilder(future: loaded,
+      body:FutureBuilder(future: loaded,
        builder: (cont,snapss){
   if (snapss.hasError){
     return Text(snapss.error.toString());

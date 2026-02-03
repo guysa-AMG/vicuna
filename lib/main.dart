@@ -21,12 +21,7 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-//  Gemini.init(apiKey: "API_KEY");
 
-  // await FlutterGemma.initialize( huggingFaceToken: const String.fromEnvironment('HUGGINGFACE_TOKEN'),maxDownloadRetries: 10,);
-
-  //  await FlutterGemma.installModel(modelType: ModelType.gemmaIt).fromNetwork("https://huggingface.co/google/gemma-3n-E2B-it-litert-preview").install();
-  //final model = await FlutterGemma.getActiveModel(maxTokens: 2048);
   LocalInstance local = LocalInstance();
   VicunaAi vicAi = VicunaAi();
   await vicAi.init();
