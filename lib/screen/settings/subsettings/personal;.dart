@@ -3,6 +3,8 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:vicuna/widgets/appabar.dart';
 
 class PersonalScreen extends StatefulWidget {
+  const PersonalScreen({super.key});
+
   @override
   State<PersonalScreen> createState() => PersonalScreenState();
 }

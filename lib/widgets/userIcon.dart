@@ -7,6 +7,8 @@ import 'package:vicuna/services/blocs/states/authenticationState.dart';
 import 'package:vicuna/widgets/appabar.dart';
 
 class UserIcon extends StatefulWidget {
+  const UserIcon({super.key});
+
   @override
   State<UserIcon> createState() => UserIconState();
 }

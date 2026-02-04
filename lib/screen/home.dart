@@ -22,6 +22,8 @@ import 'package:vicuna/widgets/reportCard.dart';
 import 'package:vicuna/widgets/userIcon.dart';
 
 class Home extends StatefulWidget {
+  const Home({super.key});
+
   @override
   State<Home> createState() => HomeState();
 }

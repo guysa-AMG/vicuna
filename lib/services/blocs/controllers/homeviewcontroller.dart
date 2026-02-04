@@ -11,13 +11,13 @@ class QuickAnalysisController extends Bloc<AnalysisEvent, Analystate> {
   QuickAnalysisController({required this.prevState, required this.vicuna})
     : super(InitialAnalysisState()) {
     on<EmptyAnalysisEvent>((event, emit) async {
-      String lang = await prevState.getLanguage();
+      String lang = prevState.getLanguage();
       vicuna.setLanguage(lang);
       emit(InitialAnalysisState());
     });
 
     on<RequestAnalysisEvent>((event, emit) async {
-      String lang = await prevState.getLanguage();
+      String lang = prevState.getLanguage();
       vicuna.setLanguage(lang);
       emit(LoadingAnalysisState());
 

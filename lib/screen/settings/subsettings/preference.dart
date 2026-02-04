@@ -7,6 +7,8 @@ import 'package:vicuna/services/repository/localpref.dart';
 import 'package:vicuna/widgets/appabar.dart';
 
 class PreferenceScreen extends StatefulWidget {
+  const PreferenceScreen({super.key});
+
   @override
   State<PreferenceScreen> createState() => PreferenceScreenState();
 }

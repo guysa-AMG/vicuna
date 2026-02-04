@@ -72,7 +72,7 @@ class ReportCardState extends State<ReportCard> {
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               children: report.warningSigns
-                  .map((signs) => Text("*  " + signs + "\n", style: value))
+                  .map((signs) => Text("*  $signs\n", style: value))
                   .toList(),
             ),
             Text("findings", style: header),
@@ -81,7 +81,7 @@ class ReportCardState extends State<ReportCard> {
               physics: NeverScrollableScrollPhysics(),
               children: report.keyFindings
                   .map(
-                    (findings) => Text("*  " + findings + "\n", style: value),
+                    (findings) => Text("*  $findings\n", style: value),
                   )
                   .toList(),
             ),
@@ -91,7 +91,7 @@ class ReportCardState extends State<ReportCard> {
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               children: report.nextSteps
-                  .map((steps) => Text("*  " + steps + "\n", style: value))
+                  .map((steps) => Text("*  $steps\n", style: value))
                   .toList(),
             ),
 

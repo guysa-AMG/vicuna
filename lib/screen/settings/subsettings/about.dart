@@ -7,6 +7,8 @@ import 'package:vicuna/widgets/loading.dart';
 import 'package:local_auth/local_auth.dart';
 
 class AboutScreen extends StatefulWidget {
+  const AboutScreen({super.key});
+
   @override
   State<AboutScreen> createState() => AboutScreenState();
 }

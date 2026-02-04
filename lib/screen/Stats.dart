@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:vicuna/widgets/userIcon.dart';
 
 class StatsScreen extends StatefulWidget {
+  const StatsScreen({super.key});
+
   @override
   State<StatsScreen> createState() => StatsScreenState();
 }

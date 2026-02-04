@@ -3,6 +3,8 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:vicuna/screen/miscscreen.dart';
 
 class TestIcon extends StatefulWidget {
+  const TestIcon({super.key});
+
   @override
   State<TestIcon> createState() => TestIconState();
 }

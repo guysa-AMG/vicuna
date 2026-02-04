@@ -6,7 +6,7 @@ class LocalInstance {
   late String Language;
   Future<void> init() async {
     inst = await SharedPreferences.getInstance();
-    Language = (await getLanguage()) ;
+    Language = (getLanguage()) ;
   }
 
 Future <void> setLanguage(String lang) async {

@@ -46,12 +46,12 @@ class ChatBotStateScreen extends State<ChatBotScreen> {
   }
 
 
-  respond(message) async {
+  Future<void> respond(message) async {
 
     await context.read<LLMController>().sendChat(message);
 
   }
-tem(message)async{    Candidates? can = await Gemini.instance.chat(
+Future<void> tem(message)async{    Candidates? can = await Gemini.instance.chat(
       [
         ...[
           Content(
@@ -131,8 +131,8 @@ tem(message)async{    Candidates? can = await Gemini.instance.chat(
       floatingActionButtonLocation: FloatingActionButtonLocation.startDocked,
       floatingActionButton:
       Animate(
+        effects: [ShimmerEffect()],
         child: Container(width: 120, height: 70,),
-effects: [ShimmerEffect()],
       )
      ,
     )

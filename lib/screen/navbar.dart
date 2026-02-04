@@ -6,6 +6,8 @@ import 'package:vicuna/screen/settings/settings.dart';
 import 'package:flutter/material.dart';
 
 class NavBar extends StatefulWidget {
+  const NavBar({super.key});
+
   @override
   State<NavBar> createState() => NavBarState();
 }

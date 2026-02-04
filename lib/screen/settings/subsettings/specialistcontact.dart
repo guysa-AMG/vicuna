@@ -3,6 +3,8 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:vicuna/widgets/appabar.dart';
 
 class SpecialistContactScreen extends StatefulWidget {
+  const SpecialistContactScreen({super.key});
+
   @override
   State<SpecialistContactScreen> createState() =>
       SpecialistContactScreenState();

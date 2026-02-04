@@ -6,6 +6,8 @@ import 'package:vicuna/widgets/appabar.dart';
 import 'package:flutter/material.dart';
 
 class AuthSignUpScreen extends StatefulWidget {
+  const AuthSignUpScreen({super.key});
+
   @override
   State<AuthSignUpScreen> createState() => AuthLoginScreenState();
 }
@@ -31,7 +33,7 @@ class AuthLoginScreenState extends State<AuthSignUpScreen> {
                   color: Colors.black87,
                 ),
               ),
-              Container(
+              SizedBox(
                 width: 250,
                 child: Row(
                   spacing: 5,

@@ -9,6 +9,8 @@ import 'package:vicuna/widgets/loading.dart';
 import 'package:vicuna/widgets/prodloader.dart';
 
 class MiscScreen extends StatefulWidget {
+  const MiscScreen({super.key});
+
   @override
   State<MiscScreen> createState() => MiscScreenState();
 }

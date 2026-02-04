@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_chat_core/flutter_chat_core.dart';
 
 class EpiCard extends StatefulWidget {
+  const EpiCard({super.key});
+
   @override
   State<EpiCard> createState() => EpicCardState();
 }
