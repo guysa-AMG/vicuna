@@ -18,9 +18,13 @@ class Authcontroller extends Cubit<Authenticationstate> {
 
   Future<void> signInWithGoogle() async {
     emit(LoadingAuthenticationState());
-    UserCredential usercred = await authRepo.googleSignIn();
+    try {
+      UserCredential usercred = await authRepo.googleSignIn();
 
-    emit(SuccessFullAuthenticationState(userCred: usercred.user!));
+      emit(SuccessFullAuthenticationState(userCred: usercred.user!));
+    } catch (e) {
+      emit(ErrorAuthenticationState(message: e.toString()));
+    }
   }
 
   Future<void> logOut() async {
@@ -32,13 +36,16 @@ class Authcontroller extends Cubit<Authenticationstate> {
 
   Future<void> signInWithFacebook() async {
     emit(LoadingAuthenticationState());
-    UserCredential? usercred = await authRepo.facebookSignIn();
-
-    if (usercred == null) {
-      emit(ErrorAuthenticationState(message: "null occured somewhere"));
-      return;
+    try {
+      UserCredential? usercred = await authRepo.facebookSignIn();
+      if (usercred == null) {
+        emit(ErrorAuthenticationState(message: "null occured somewhere"));
+        return;
+      } else {
+        emit(SuccessFullAuthenticationState(userCred: usercred.user!));
+      }
+    } catch (e) {
+      emit(ErrorAuthenticationState(message:e.toString()));
     }
-
-    emit(SuccessFullAuthenticationState(userCred: usercred.user!));
   }
 }
