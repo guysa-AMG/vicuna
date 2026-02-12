@@ -4,6 +4,12 @@ Vicuna Med is a safe personal AI Medical transcriber. and a personal assistant t
 all data shared with llm is store locally
 
 
+
+
+#TODO Features 
+<li>specialist extension - with this feature all your concerns and information shared with the llm will be summerized and sent to your specialist </li>
+
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
