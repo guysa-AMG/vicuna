@@ -101,7 +101,7 @@ Future<void> tem(message)async{    Candidates? can = await Gemini.instance.chat(
           colors: Theme.brightnessOf(context) == Brightness.dark
               ? ChatColors.dark()
               : ChatColors.light(),
-          typography: ChatTypography.fromThemeData(Theme.of(context)),
+          typography: ChatTypography.standard(),
           shape: BorderRadiusGeometry.circular(5),
         ),
      
