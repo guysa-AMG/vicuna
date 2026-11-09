@@ -1,0 +1,74 @@
+name: Build & Deploy to Play Store
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      build_number:
+        description: "Build number (defaults to the run number)"
+        required: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      # Secret Text credentials -> repository secrets
+      UPLOAD_KEY_ALIAS: ${{ secrets.UPLOAD_KEY_ALIAS }}
+      UPLOAD_KEY_PASSWORD: ${{ secrets.UPLOAD_KEY_PASSWORD }}
+      UPLOAD_STORE_PASSWORD: ${{ secrets.UPLOAD_STORE_PASSWORD }}
+      UPLOAD_KEYSTORE_FILE_PATH: ${{ github.workspace }}/android/app/upload-keystore.jks
+      GPLAY_JSON_FILE_PATH: ${{ github.workspace }}/android/fastlane/service.json
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Secret Files -> base64-encoded repository secrets
+      - name: Prepare secrets
+        run: |
+          echo "${{ secrets.UPLOAD_KEYSTORE_FILE_BASE64 }}" | base64 --decode > "$UPLOAD_KEYSTORE_FILE_PATH"
+          mkdir -p android/fastlane
+          echo "${{ secrets.GPLAY_JSON_KEY_BASE64 }}" | base64 --decode > "$GPLAY_JSON_FILE_PATH"
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Set up Ruby & Fastlane
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true
+          working-directory: android
+
+      - name: Flutter pub get
+        run: flutter pub get
+
+      - name: Build & deploy with Fastlane
+        working-directory: android
+        run: |
+          bundle exec fastlane deploy \
+            build_number:${{ inputs.build_number || github.run_number }} \
+            --verbose
+
+      - name: Notify success
+        if: success()
+        run: python3 messagebot/main.py -m "Successfully deployed to playstore"
+
+      - name: Notify failure
+        if: failure()
+        run: python3 messagebot/main.py -m "Pipeline failed, please review and fix the issue"
+
+      - name: Cleanup secrets
+        if: always()
+        run: |
+          rm -f "$UPLOAD_KEYSTORE_FILE_PATH" "$GPLAY_JSON_FILE_PATH"
