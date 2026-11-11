@@ -7,12 +7,11 @@ class AuthRepo {
 
   Future<UserCredential> googleSignIn() async {
     await GoogleSignIn.instance.initialize();
-    
+
     GoogleSignInAccount acc = await GoogleSignIn.instance.authenticate();
     GoogleSignInAuthentication ggAuth = acc.authentication;
     UserCredential cred = await auth.signInWithCredential(
-      GoogleAuthProvider.credential(idToken: ggAuth.idToken)
-    
+      GoogleAuthProvider.credential(idToken: ggAuth.idToken),
     );
 
     return cred;

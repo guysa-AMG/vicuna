@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/change_notifier.dart';
 
 class DeterminedLoadingWidget extends StatefulWidget {
   double? value;
@@ -32,10 +33,7 @@ class DeterminedLoadingWidgetState extends State<DeterminedLoadingWidget> {
                 ),
               ),
               if (super.widget.value != null)
-                Text(
-                  "%",
-                  style: TextStyle(fontSize: 20),
-                ),
+                Text("%", style: TextStyle(fontSize: 20)),
             ],
           ),
           SizedBox(
@@ -47,7 +45,8 @@ class DeterminedLoadingWidgetState extends State<DeterminedLoadingWidget> {
               padding: EdgeInsets.all(5),
               strokeCap: StrokeCap.values[1],
               backgroundColor: const Color.fromARGB(74, 37, 37, 37),
-              trackGap: 3,
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.teal),
+             trackGap: 3,
             ),
           ),
         ],

@@ -59,7 +59,7 @@ class PreferenceScreenState extends State<PreferenceScreen> {
                             selected:
                                 ctax.read<LocalInstance>().Language == lan,
                             onTap: () async {
-                               await ctax.read<LocalInstance>().setLanguage(lan);
+                              await ctax.read<LocalInstance>().setLanguage(lan);
                               setState(() {
                                 debugPrint(ctax.read<LocalInstance>().Language);
                               });

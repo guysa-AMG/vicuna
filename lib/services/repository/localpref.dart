@@ -6,36 +6,48 @@ class LocalInstance {
   late String Language;
   Future<void> init() async {
     inst = await SharedPreferences.getInstance();
-    Language = (getLanguage()) ;
+    Language = (getLanguage());
   }
 
-Future <void> setLanguage(String lang) async {
+  Future<void> setLanguage(String lang) async {
     Language = lang;
     await inst.setString("Lang", lang);
   }
 
-String  getLanguage() {
-    String? res =  inst.getString("Lang")??"English";
+  bool hasBeenOnBoarded() {
+    bool onBoarded = inst.getBool("hasBeenOnBoarded") ?? false;
+    return onBoarded;
+  }
+
+  void OnBoarded(bool online) {
+    inst.setBool("hasBeenOnBoarded", true);
+    inst.setBool("onlineModel", online);
+  }
+
+  bool isCloudModel() => inst.getBool("onlineModel") ?? true;
+
+  String getLanguage() {
+    String? res = inst.getString("Lang") ?? "English";
     return res;
   }
 
-bool getMode() {
-    bool? mode = inst.getBool("isDark")??false;
+  bool getMode() {
+    bool? mode = inst.getBool("isDark") ?? false;
     return mode;
   }
 
-bool toggleMode() {
+  bool toggleMode() {
     inst.setBool("isDark", !(inst.getBool("isDark") ?? false));
     bool mode = inst.getBool("isDark") ?? false;
     debugPrint(mode.toString());
     return mode;
   }
 
- bool hasValidLocalModel(){
- return inst.getBool("verified")??false;
- }
+  bool hasValidLocalModel() {
+    return inst.getBool("verified") ?? false;
+  }
 
- void setValidityLocalModel(bool s)async{
-await inst.setBool("verified", s);
- }
+  void setValidityLocalModel(bool s) async {
+    await inst.setBool("verified", s);
+  }
 }

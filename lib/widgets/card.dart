@@ -15,10 +15,6 @@ class EpicCardState extends State<EpiCard> {
   }
 }
 
-
-class Loading extends TextMessage{
-
-   Loading({required super.authorId, required super.id, required super.text});
-
-
+class Loading extends TextMessage {
+  Loading({required super.authorId, required super.id, required super.text});
 }

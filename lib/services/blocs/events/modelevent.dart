@@ -1,6 +1,6 @@
-abstract class  ModelEvent{}
+abstract class ModelEvent {}
 
-class RequestModelEvent{
+class RequestModelEvent {
   String Query;
   RequestModelEvent({required this.Query});
 }

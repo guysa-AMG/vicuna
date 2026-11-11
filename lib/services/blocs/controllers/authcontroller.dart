@@ -45,7 +45,7 @@ class Authcontroller extends Cubit<Authenticationstate> {
         emit(SuccessFullAuthenticationState(userCred: usercred.user!));
       }
     } catch (e) {
-      emit(ErrorAuthenticationState(message:e.toString()));
+      emit(ErrorAuthenticationState(message: e.toString()));
     }
   }
 }

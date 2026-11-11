@@ -14,7 +14,7 @@ import 'package:vicuna/widgets/appabar.dart';
 
 class ChatBotScreen extends StatefulWidget {
   final String? InitialMessage;
-  const ChatBotScreen({super.key ,this.InitialMessage});
+  const ChatBotScreen({super.key, this.InitialMessage});
   @override
   State<ChatBotScreen> createState() => ChatBotStateScreen();
 }
@@ -25,7 +25,6 @@ class ChatBotStateScreen extends State<ChatBotScreen> {
   @override
   void initState() {
     super.initState();
-
 
     targetLanguage = RepositoryProvider.of<LocalInstance>(context).Language;
     if (super.widget.InitialMessage != null) {
@@ -40,18 +39,15 @@ class ChatBotStateScreen extends State<ChatBotScreen> {
 
       _chatController.insertMessage(tm);
       respond(tm.text);
-
-
     }
   }
 
-
   Future<void> respond(message) async {
-
     await context.read<LLMController>().sendChat(message);
-
   }
-Future<void> tem(message)async{    Candidates? can = await Gemini.instance.chat(
+
+  Future<void> tem(message) async {
+    Candidates? can = await Gemini.instance.chat(
       [
         ...[
           Content(
@@ -82,61 +78,65 @@ Future<void> tem(message)async{    Candidates? can = await Gemini.instance.chat(
 
   @override
   Widget build(BuildContext ctx) {
-    return BlocListener<LLMController,ModelState>(
-      listener: (cont,state){
-        switch(state){
+    return BlocListener<LLMController, ModelState>(
+      listener: (cont, state) {
+        switch (state) {
           case LoadingModelState():
-            _chatController.insertMessage(Message.system(id: "000", authorId: "boot", text: ""));
+            _chatController.insertMessage(
+              Message.system(id: "000", authorId: "boot", text: ""),
+            );
           case NewContentModelState():
-            _chatController.insertMessage(Message.text(id: state.cont.hashCode.toString(), authorId: "mark", text: state.cont));
-
-                  }
+            _chatController.insertMessage(
+              Message.text(
+                id: state.cont.hashCode.toString(),
+                authorId: "mark",
+                text: state.cont,
+              ),
+            );
+        }
       },
-    
-   child: Scaffold(
-      appBar: EpAppBar(title: "Vicuna AI"),
-      body: Chat(
-        currentUserId: "user1",
-        theme: ChatTheme(
-          colors: Theme.brightnessOf(context) == Brightness.dark
-              ? ChatColors.dark()
-              : ChatColors.light(),
-          typography: ChatTypography.standard(),
-          shape: BorderRadiusGeometry.circular(5),
+
+      child: Scaffold(
+        appBar: EpAppBar(title: "Vicuna AI"),
+        body: Chat(
+          currentUserId: "user1",
+          theme: ChatTheme(
+            colors: Theme.brightnessOf(context) == Brightness.dark
+                ? ChatColors.dark()
+                : ChatColors.light(),
+            typography: ChatTypography.standard(),
+            shape: BorderRadiusGeometry.circular(5),
+          ),
+
+          onMessageSend: (text) {
+            _chatController.insertMessage(
+              TextMessage(
+                id: "${Random().nextInt(100) + 1}",
+                authorId: "user1",
+                text: text,
+                createdAt: DateTime.now(),
+              ),
+            );
+            respond(text);
+          },
+
+          onAttachmentTap: () async {
+            await FilePickerIO().pickFiles(
+              type: FileType.custom,
+              allowedExtensions: ["jpg", "pdf", "png", "webp"],
+            );
+          },
+          resolveUser: (UserID id) async {
+            return User(id: id, name: "john", createdAt: DateTime.now());
+          },
+          chatController: _chatController,
         ),
-     
-        onMessageSend: (text) {
-          _chatController.insertMessage(
-            TextMessage(
-              id: "${Random().nextInt(100) + 1}",
-              authorId: "user1",
-              text: text,
-              createdAt: DateTime.now(),
-            ),
-          );
-          respond(text);
-        },
-          
-        onAttachmentTap: () async {
-          await FilePickerIO().pickFiles(
-            type: FileType.custom,
-            allowedExtensions: ["jpg", "pdf", "png", "webp"],
-          );
-        },
-        resolveUser: (UserID id) async {
-          return User(id: id, name: "john", createdAt: DateTime.now());
-        },
-        chatController: _chatController,
+        floatingActionButtonLocation: FloatingActionButtonLocation.startDocked,
+        floatingActionButton: Animate(
+          effects: [ShimmerEffect()],
+          child: Container(width: 120, height: 70),
+        ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.startDocked,
-      floatingActionButton:
-      Animate(
-        effects: [ShimmerEffect()],
-        child: Container(width: 120, height: 70,),
-      )
-     ,
-    )
-    
     );
   }
 }

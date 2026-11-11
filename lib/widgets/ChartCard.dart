@@ -3,7 +3,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 
 class EpiChartCard extends StatefulWidget {
   String title;
-  EpiChartCard({super.key,required this.title});
+  EpiChartCard({super.key, required this.title});
   @override
   State<EpiChartCard> createState() => EpicCardState();
 }

@@ -3,7 +3,6 @@ import 'package:vicuna/model/report.dart';
 import 'package:vicuna/services/misc/constants.dart';
 
 class ReportCard extends StatefulWidget {
-
   MedicalReport report;
 
   ReportCard({super.key, required this.report});
@@ -62,7 +61,6 @@ class ReportCardState extends State<ReportCard> {
                   ),
                 ],
               ),
-              
             ),
 
             Text("Brief Explanation", style: header),
@@ -80,9 +78,7 @@ class ReportCardState extends State<ReportCard> {
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               children: report.keyFindings
-                  .map(
-                    (findings) => Text("*  $findings\n", style: value),
-                  )
+                  .map((findings) => Text("*  $findings\n", style: value))
                   .toList(),
             ),
 

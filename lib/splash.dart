@@ -18,12 +18,11 @@ import 'package:vicuna/services/repository/localpref.dart';
 Future<Widget> Splash() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  
+
   LocalInstance local = LocalInstance();
   VicunaAi vicAi = VicunaAi();
   await vicAi.init();
   await local.init();
-  
 
   return MultiRepositoryProvider(
     providers: [

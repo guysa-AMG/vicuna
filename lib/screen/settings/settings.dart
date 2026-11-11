@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:vicuna/screen/settings/subsettings/about.dart';
@@ -10,7 +9,7 @@ import 'package:vicuna/widgets/testscreen.dart';
 import 'package:vicuna/widgets/userIcon.dart';
 
 class Settings extends StatefulWidget {
-const  Settings({super.key});
+  const Settings({super.key});
   @override
   State<Settings> createState() => SettingsState();
 }
